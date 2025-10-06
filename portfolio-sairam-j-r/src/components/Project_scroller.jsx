@@ -8,6 +8,21 @@ import {
 import { SiSpacex } from "react-icons/si";
 import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { useEffect, useRef } from "react";
+import { TextHoverEffect } from "./text-hover-effect.tsx";
+import { HoverBorderGradient } from "./hover-border-gradient.tsx";
+import { FloatingDock } from "@/components/ui/floating-dock";
+import {
+  IconBrandGithub,
+  IconBrandX,
+  IconExchange,
+  IconHome,
+  IconNewSection,
+  IconTerminal2,
+} from "@tabler/icons-react";
+
+
+
+
 
 export const SmoothScrollHero = () => {
 
@@ -33,11 +48,9 @@ export const SmoothScrollHero = () => {
 
   return (
     <div className="bg-zinc-950">
-      
-        
         <Hero />
         <Schedule />
-      
+        <TextHoverEffect text="SAIRAM" />
     </div>
   );
 };
@@ -154,47 +167,140 @@ const ParallaxImg = ({ className, alt, src, start, end }) => {
   );
 };
 
+
+
+
+
+
 const Schedule = () => {
+  const projects = [
+  {
+    title: "Portfolio Website",
+    description:
+      "A personal portfolio website showcasing projects, skills, and experience. Built with React and TailwindCSS, fully responsive and optimized for performance.",
+    tech: "React, TailwindCSS",
+    link: "https://example.com/portfolio",
+    image:
+      "https://images.unsplash.com/photo-1759588032622-1388cf9505ad?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "E-commerce App",
+    description:
+      "A fully functional e-commerce application with product catalog, cart, and checkout system. Integrated with Next.js for server-side rendering and MongoDB for database management.",
+    tech: "Next.js, Node.js, MongoDB",
+    link: "https://example.com/ecommerce",
+    image:
+      "https://plus.unsplash.com/premium_photo-1749666992717-2818dd728418?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Blog Platform",
+    description:
+      "A modern blog platform that allows users to create, edit, and publish articles. Powered by Gatsby for fast static site generation and GraphQL for flexible content querying.",
+    tech: "Gatsby, GraphQL",
+    link: "https://example.com/blog",
+    image:
+      "https://plus.unsplash.com/premium_photo-1749666992717-2818dd728418?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Chat App",
+    description:
+      "A real-time chat application built with React Native and Firebase. Features include private messaging, group chats, and push notifications for a seamless mobile experience.",
+    tech: "React Native, Firebase",
+    link: "https://example.com/chat",
+    image:
+      "https://plus.unsplash.com/premium_photo-1749666992717-2818dd728418?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
+
+
   return (
     <section
       id="launch-schedule"
-      className="mx-auto max-w-5xl px-4 py-48 text-white"
+      className="mx-auto max-w-6xl px-2 py-10 text-white"
     >
       <motion.h1
         initial={{ y: 48, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ ease: "easeInOut", duration: 0.75 }}
-        className="mb-20 text-4xl font-black uppercase text-zinc-50"
+        className="mb-12 text-5xl font-black uppercase  font-semibold text-center"
       >
-        Launch Schedule
+        Projects List
       </motion.h1>
-      <ScheduleItem title="NG-21" date="Dec 9th" location="Florida" />
-      <ScheduleItem title="Starlink" date="Dec 20th" location="Texas" />
-      <ScheduleItem title="Starlink" date="Jan 13th" location="Florida" />
-      <ScheduleItem title="Turksat 6A" date="Feb 22nd" location="Florida" />
-      <ScheduleItem title="NROL-186" date="Mar 1st" location="California" />
-      <ScheduleItem title="GOES-U" date="Mar 8th" location="California" />
-      <ScheduleItem title="ASTRA 1P" date="Apr 8th" location="Texas" />
+
+      <div className="flex flex-col gap-10">
+        {projects.map((proj, index) => (
+          <ScheduleItem
+            key={index}
+            title={proj.title}
+            tech={proj.tech}
+            description={proj.description}
+            link={proj.link}
+            image={proj.image}
+          />
+        ))}
+      </div>
     </section>
   );
 };
 
-const ScheduleItem = ({ title, date, location }) => {
+
+
+const ScheduleItem = ({ title, tech, link, image, description }) => {
   return (
     <motion.div
       initial={{ y: 48, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ ease: "easeInOut", duration: 0.75 }}
-      className="mb-9 flex items-center justify-between border-b border-zinc-800 px-3 pb-9"
+      className="flex flex-col md:flex-row-reverse items-center gap-6 border-b border-zinc-800 pb-6"
     >
-      <div>
-        <p className="mb-1.5 text-xl text-zinc-50">{title}</p>
-        <p className="text-sm uppercase text-zinc-500">{date}</p>
+      {/* Project Image on Right */}
+      <div className="w-full md:w-52 h-52  flex-shrink-0 overflow-hidden rounded-xl">
+
+        <img
+            
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105 "
+        />
       </div>
-      <div className="flex items-center gap-1.5 text-end text-sm uppercase text-zinc-500">
-        <p>{location}</p>
-        <FiMapPin />
+
+      {/* Project Details on Left */}
+      <div className="flex flex-col gap-2 flex-1 text-left">
+        <p className="text-2xl font-semibold text-cyan-300">{title}</p>
+        <p className="text-sm uppercase text-zinc-400">{tech}</p>
+
+        <p className="text-md  text-zinc-300  text-balance pr-10">{description}</p>
+
+        
+        <div className="mt-2">
+        <HoverBorderGradient containerClassName="rounded-full" as="button" className="bg-black   text-white flex items-center space-x-2 ">
+         <AceternityLogo />
+        <span>View Project </span>
+
+        </HoverBorderGradient>
+        </div>
       </div>
     </motion.div>
   );
 };
+
+const AceternityLogo = () => {
+  return (
+    <svg
+      width="66"
+      height="65"
+      viewBox="0 0 66 65"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-3 w-3  dark:text-cyan-300"
+    >
+      <path
+        d="M8 8.05571C8 8.05571 54.9009 18.1782 57.8687 30.062C60.8365 41.9458 9.05432 57.4696 9.05432 57.4696"
+        stroke="currentColor"
+        strokeWidth="9"
+        strokeMiterlimit="3.86874"
+      />
+    </svg>
+  );
+};
+

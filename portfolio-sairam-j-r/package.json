@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.29",
+    "@tabler/icons-react": "^3.35.0",
     "@tailwindcss/vite": "^4.1.14",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.22",
